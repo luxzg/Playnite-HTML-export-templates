@@ -1,0 +1,1 @@
+<h2><strong>%quicklinks_name%</strong></h2> <!-- this is literally header of quick links sections saying quick links in bold -->

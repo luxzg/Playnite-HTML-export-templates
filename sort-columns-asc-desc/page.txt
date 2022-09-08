@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>%pagetitle%</title>
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<style>
+h2:after,
+.cards .card:after {
+  position: absolute;
+}
+
+h2,
+h2 strong,
+.cards .card
+{
+  position: relative;
+}
+
+h2,
+h2 strong,
+h2 span {
+  vertical-align: middle;
+}
+
+body {
+  background: #24282f;
+  font-family: 'Arial';
+}
+
+.wrapper {
+  padding: 15px;
+}
+
+h2 {
+  padding: 10px;
+  padding-left: 25px;
+  color: #ccc;
+  margin: 0;
+  cursor:pointer;
+}
+
+h2 strong {
+  z-index: 2;
+  background: #24282f;
+  padding: 4px 8px;
+}
+
+h2 span {
+  font-size: 0.7em;
+  color: #aaa;
+  margin-left: 10px;
+}
+
+h2:after {
+  content: '';
+  z-index: 1;
+  bottom: 50%;
+  margin-bottom: -2px;
+  height: 2px;
+  left: 0;
+  right: 0;
+  background: #373d47;
+}
+
+#h2jscript {
+  cursor:pointer;
+}
+
+.quicklinks {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.quicklink {
+  margin: 10px;
+}
+
+/* link no underline */
+a {
+  text-decoration: none;
+}
+
+/* unvisited link */
+a:link {
+  color: #CCC;
+}
+/* visited link */
+a:visited {
+  color: #CCC;
+}
+/* mouse over link */
+a:hover {
+  color: #EEE;
+}
+/* selected link */
+a:active {
+  color: #CCC;
+}
+
+.Menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#BackTopButton {
+  display: none; /* Hidden by default = none */
+  position: fixed; /* Fixed/sticky position */
+  top: 20px; /* Place the button at the bottom of the page = bottom: 20px */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 20px; /* Increase font size */
+}
+
+.MenuButton {
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #555;/* Set a background color */
+  color: #ccc; /* Text color */
+  padding: 5px; /* Some padding */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 20px;/* Increase font size */
+  margin-top: 10px;
+  margin-left: 15px;
+  cursor:pointer;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #666; /* Add a dark-grey background on hover */
+  color: #eee; /* Text color */
+}
+
+#BackTopButton:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+#label {
+   font-size: 18px;
+   color: #CCC;
+   margin: 5px;
+}
+
+#label a {
+   color: #CCC;
+}
+
+/* unvisited link */
+#label a:link {
+  color: #CCC;
+}
+/* visited link */
+#label a:visited {
+  color: #CCC;
+}
+/* mouse over link */
+#label a:hover {
+  color: #EEE;
+}
+/* selected link */
+#label a:active {
+  color: #CCC;
+}
+
+	                                                   /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+  vertical-align: middle;                              /* align middle */
+  text-align: left;                                    /* align text left */
+}
+
+.tdname {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+  vertical-align: middle;                              /* align middle */
+  text-align: left;                                    /* align text left */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+  border-collapse: collapse;						   /* to make rows collapse if they are hidden using search */
+  table-layout: fixed;
+}
+
+input{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 300px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 1rem;
+}
+
+input:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+
+#searchbutton{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 175px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 2rem;
+}
+
+#searchbutton:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+
+/* sorting table, just looks */
+ table > thead > tr > th {
+        cursor: pointer;
+    }
+    table > thead > tr > th[data-sort=asc] {
+        background-color: blue;
+        color: white;
+    }
+    table > thead > tr > th[data-sort=desc] {
+        background-color: red;
+        color: white;
+    }
+  </style>
+  <script>
+	function search() {
+		var input, filter, games, game, i, j, txtValue, fragment, parentElement, wrapper, quicklinks, quicklink, quicklinkid, cards, needhide, numvisible, quicklinklinks, header;
+		input = document.getElementById("search");
+		filter = input.value.toUpperCase();
+		wrapper = document.getElementById("wrapper");
+		parentElement = wrapper.parentElement;
+		fragment = document.createDocumentFragment();
+		fragment.appendChild(wrapper.cloneNode(true));
+		wrapper.remove();
+		games = fragment.childNodes[0].getElementsByClassName("tdname");
+		i = games.length - 1;
+		
+		while (i >= 0 ) {
+			game = games[i];
+			txtValue = game.childNodes[0].innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				game.parentElement.style.display = "";
+			} else {
+				game.parentElement.style.display = "none";
+			}
+			i--;
+		}
+
+		quicklinks = fragment.childNodes[0].querySelectorAll("tr[id^='quicklink-']")
+		i = quicklinks.length - 1;
+		while (i >= 0) {
+			quicklink = quicklinks[i];
+			quicklinkid = quicklink.id;
+			cards = fragment.getElementById(quicklinkid.replace("quicklink-", ""));
+			needhide = true;
+			if(cards)
+			{
+				j = cards.children.length -1
+				numvisible = 0;
+				while (j >= 0)
+				{
+					if (cards.children[j].style.display == "")
+					{
+						needhide = false;
+						numvisible++;
+					}
+					j--;
+				}
+
+				quicklinklinks = fragment.childNodes[0].querySelectorAll("a[href=\"#" + quicklinkid.replace(/["\\]/g, '\\$&') + "\"]")
+				if (needhide)
+				{
+					cards.style.display = "none";
+					quicklink.style.display = "none";
+					quicklink.children[0].children[0].children[0].innerHTML = "&#x25BA;";
+					quicklink.children[0].children[0].children[0].style.color = "#790000";
+					quicklink.children[0].children[0].children[1].children[0].innerText = "( " + numvisible.toString() + " )";
+					if (quicklinklinks.length == 1)
+					{						
+						quicklinklinks[0].style.display = "none";
+					}
+				} else {
+					cards.style.display = "";
+					quicklink.style.display = "";
+					quicklink.children[0].children[0].children[0].innerHTML = "&#x25BC;";
+					quicklink.children[0].children[0].children[0].style.color = "#007962";
+					quicklink.children[0].children[0].children[1].children[0].innerText = "( " + numvisible.toString() + " )";
+					if (quicklinklinks.length == 1)
+					{						
+						quicklinklinks[0].style.display = "";
+					}
+				}
+			}
+			i--;
+		}
+
+		parentElement.appendChild(fragment.childNodes[0]);
+
+		//have to renable this
+		const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+		observer.observe();
+
+		var input = document.getElementById("search");
+
+		// Execute a function when the user releases a key on the keyboard
+		input.addEventListener("keyup", function(event) 
+		{
+			// Number 13 is the "Enter" key on the keyboard
+			if (event.keyCode === 13) 
+			{
+				// Cancel the default action, if needed
+				event.preventDefault();
+				// Trigger the button element with a click
+				document.getElementById("searchbutton").click();
+			}
+		});
+	}
+	
+	// faster sorting function -- https://stackoverflow.com/questions/59282842/how-to-make-sorting-html-tables-faster
+	function sortTableRowsByColumn( table, columnIndex, ascending ) {
+
+		const rows = Array.from( table.querySelectorAll( ':scope > tbody > tr' ) );
+		
+		rows.sort( ( x, y ) => {
+		
+			var xValue = x.cells[columnIndex].textContent;
+				if( typeof xValue === 'undefined' || xValue === null || xValue === '' ) // solving issue of blank table cells // https://stackoverflow.com/questions/2647867/how-can-i-determine-if-a-variable-is-undefined-or-null
+					{
+						xValue = 0;
+					}
+			var yValue = y.cells[columnIndex].textContent;
+				if( typeof yValue === 'undefined' || yValue === null || yValue === '' )
+					{
+						yValue = 0;
+					}
+			
+			// return ascending ? ( xValue - yValue ) : ( yValue - xValue ); // confusing me with short notation lol
+				if (ascending)
+					{
+						if (columnIndex === 0 || columnIndex === 3 || columnIndex === 4)
+							{
+								return parseInt(xValue) - parseInt(yValue);
+							}
+						else if (columnIndex === 5 || columnIndex === 7)
+							{
+								if (xValue == 0) {xValue = '01.01.1900'}					// if blank or null set date to 1900. before there were no computers
+								const datearrayx = xValue.toString().split('.');			// have to add toString - see: https://bobbyhadz.com/blog/javascript-typeerror-string-split-is-not-a-function#:~:text=The%20%22split%20is%20not%20a,the%20split%20method%20on%20strings.
+								xValue = datearrayx[2]+'/'+datearrayx[1]+'/'+datearrayx[0]	// then reformat to yyyy/mm/dd so it can be used as date
+								xValue = new Date(xValue);									// then make a real date out of it
+								
+								if (yValue == 0) {yValue = '01.01.1900'}
+								const datearrayy = yValue.toString().split('.');
+								yValue = datearrayy[2]+'/'+datearrayy[1]+'/'+datearrayy[0]
+								yValue = new Date(yValue);
+								
+								return xValue - yValue;	// dates sort as numbers - see this: https://stackoverflow.com/questions/10123953/how-to-sort-an-object-array-by-date-property
+							}
+						else
+							{
+								return xValue.localeCompare(yValue);
+							}
+					}
+				else
+					{
+						if (columnIndex === 0 || columnIndex === 3 || columnIndex === 4)
+							{
+								return parseInt(yValue) - parseInt(xValue);
+							}
+						else if (columnIndex === 5 || columnIndex === 7)
+							{
+								if (xValue == 0) {xValue = '01.01.1900'}
+								const datearrayx = xValue.toString().split('.');
+								xValue = datearrayx[2]+'/'+datearrayx[1]+'/'+datearrayx[0]
+								xValue = new Date(xValue);
+								
+								if (yValue == 0) {yValue = '01.01.1900'}
+								const datearrayy = yValue.toString().split('.');
+								yValue = datearrayy[2]+'/'+datearrayy[1]+'/'+datearrayy[0]
+								yValue = new Date(yValue);
+								
+								return yValue - xValue;
+							}
+						else
+							{
+								return yValue.localeCompare(xValue);
+							}
+					}
+		} );
+
+		for( let row of rows ) {
+			table.tBodies[0].appendChild( row );
+		}
+	}
+
+	function onColumnHeaderClicked( ev ) {
+		
+		const th = ev.currentTarget;
+		const table = th.closest( 'table' );
+		const thIndex = Array.from( th.parentElement.children ).indexOf( th );
+
+		const ascending = !( 'sort' in th.dataset ) || th.dataset.sort != 'asc';
+		
+		sortTableRowsByColumn( table, thIndex, ascending );
+		
+		const allTh = table.querySelectorAll( ':scope > thead > tr > th' );
+		for( let th2 of allTh ) {
+			delete th2.dataset['sort'];
+		}
+	 
+		th.dataset['sort'] = ascending ? 'asc' : 'desc';
+	}
+
+	window.addEventListener( 'DOMContentLoaded', function() {
+		
+		const table = document.querySelector( 'table' );
+		const tb = table.tBodies[0];
+		
+	} );
+  </script>
+  </head>
+  <body>
+    <button onclick="topFunction()" id="BackTopButton" title="Go to top">Top</button>
+	<button onclick="enablesort()">Enable table sorting (removes quicklink groups and links)</button><!-- runs function that removes quicklinks -->
+	<button onclick="window.location.reload()">Return quicklinks (resets sorting)</button><!-- https://stackoverflow.com/questions/3715047/how-to-reload-a-page-using-javascript -->
+    <div class="wrapper" id="wrapper">
+      %menuentryheader%
+      <div class="Menu">%allmenuentries%</div>
+	  <!-- removed search input box -->
+      %quicklinksheader%
+      <div class="quicklinks">%allquicklinks%</div>
+      <h2></h2>
+      <div class="cards">
+	  <TABLE  name="gamestable" class="detailstable" id="detailstable">
+      <COLGROUP><COL WIDTH="5%"><COL WIDTH="35%"><COL WIDTH="10%"><COL WIDTH="10%"><COL WIDTH="10%"><COL WIDTH="10%"><COL WIDTH="10%"><COL WIDTH="10%"></COLGROUP><!-- fixed columns -->
+	  <THEAD><TR>
+		  <TH onclick="onColumnHeaderClicked(event)"></TH>
+		  <TH onclick="onColumnHeaderClicked(event)"><B>%name_name%</B></TH>
+		  <TH onclick="onColumnHeaderClicked(event)"><B>%playtime_name%</B></TH>
+		  <TH onclick="onColumnHeaderClicked(event)"><B>%communityscore_name%</B></TH>
+		  <TH onclick="onColumnHeaderClicked(event)"><B>%criticscore_name%</B></TH>
+		  <TH onclick="onColumnHeaderClicked(event)"><B>%releasedate_name%</B></TH>
+		  <TH onclick="onColumnHeaderClicked(event)"><B>%source_name%</B></TH>
+		  <TH onclick="onColumnHeaderClicked(event)"><B>%added_name%</B></TH>
+	  </TR></THEAD>
+	  <TBODY>
+   	  %allgamecardswithheaders%
+	  </TBODY>
+	  </TABLE>
+      </div>
+    </div>
+	<script>
+
+	// removed search function on keyup/Enter
+	
+	//Get the button:
+	mybutton = document.getElementById("BackTopButton");
+
+	// When the user scrolls down 20px from the top of the document, show the button
+	window.onscroll = function() {scrollFunction();};
+
+	function scrollFunction() {
+	  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) { // wait for at least 100 scroll, was 20
+		mybutton.style.display = "block";
+	  } else {
+		mybutton.style.display = "none";
+	  }
+	}
+
+	// When the user clicks on the button, scroll to the top of the document
+	function topFunction() {
+	  document.body.scrollTop = 0; // For Safari
+	  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	}
+		
+	function ShowHide(body_id){
+	var elem
+
+		elem = document.getElementById(body_id);
+		elemclick = document.getElementById("eye-" + body_id);
+		
+		if(!elem) return true;
+		if(!elemclick) return true;
+
+		if (elem.style.display == "none") {
+		  elem.style.display = "";
+		  elemclick.innerHTML = "&#x25BC;";
+		  elemclick.style.color = "#007962";
+		}
+		else
+		{
+		  elem.style.display = "none";
+		  elemclick.innerHTML = "&#x25BA;";
+		  elemclick.style.color = "#790000";
+		}
+		return true;
+	}
+	
+	// table sorting scripts
+	function enablesort()
+	{ // this one first deletes quicklinks based on CSS class name "quicklinks"
+	
+	  var quicklinksbar = document.getElementsByClassName("quicklinks"); // https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp
+	  quicklinksbar[0].parentNode.removeChild(quicklinksbar[0]);
+	  
+	  var i;
+	  var table = document.getElementById("detailstable");
+	  
+	  // then delete all rows that contain quicklink headers eg. TR id="quicklink-A"
+	  var rows = table.rows;
+	  for (i = 1; i < (rows.length - 1); i++) {
+	  var quicklink = document.querySelector('[id^="quicklink-"]'); // https://stackoverflow.com/questions/6991494/javascript-getelementbyid-based-on-a-partial-string
+		quicklink.parentNode.removeChild(quicklink);
+		}
+	}
+
+   </script>
+  </body>
+</html>

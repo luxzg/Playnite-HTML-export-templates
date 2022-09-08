@@ -1,0 +1,10 @@
+<TR>
+	<TD>%count%.</TD>
+	<TD class="tdname">%gamename%</TD>
+	<TD>%playtime%</TD>
+	<TD>%communityscore%</TD>
+	<TD>%criticscore%</TD>
+	<TD>%releasedatedate%</TD>
+	<TD>%source%</TD>
+	<TD>%addeddate%</TD>
+</TR>

@@ -1,0 +1,1 @@
+<h2><strong>%pagetitle%</strong></h2> <!-- prints name of your page on top -->
